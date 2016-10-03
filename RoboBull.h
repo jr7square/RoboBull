@@ -4,14 +4,16 @@
 #include <Arduino.h>
 
 
+
+
 class RoboBull {
 private:
   Servo LServo;
   Servo RServo;
-  const float maxdelay;
+  const float maxdelay = 60.0;
   unsigned short lServospeed;
   unsigned short rServospeed;
-  const short MAXSPEED;
+  const short MAXSPEED = 10;
 public:
   /* Constructor */
   RoboBull();
@@ -44,10 +46,9 @@ public:
   */
   void turn90(String direction);
 
-  /* Getters */
+  /* Getters   */
   unsigned short getLspeed();
-  unsigned short getFspeed();
-
+  unsigned short getRspeed();
 };
 
 #endif

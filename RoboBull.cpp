@@ -4,15 +4,11 @@
 RoboBull::RoboBull() {
   LServo.attach(2);
   RServo.attach(3);
-
-  LServo.write(90);
-  RServo.write(90);
-
-  maxdelay = 60.0;
-
-  MAXSPEED = 10;
   lServospeed = 90;
   rServospeed = 90;
+
+  LServo.write(lServospeed);
+  RServo.write(rServospeed);
 }
 
 void RoboBull::forward(unsigned short Lspeed, unsigned short Rspeed,
@@ -29,14 +25,15 @@ void RoboBull::forward(unsigned short Lspeed, unsigned short Rspeed,
     LServo.write(lServospeed);
     RServo.write(rServospeed);
   }
-  delay(delaytime * 1000);
+  if(delaytime > 0)
+    delay(delaytime * 1000);
   return;
 }
 
-void RoboBull::backward(unsigned short Lspeed, unsinged short Rspeed,
+void RoboBull::backward(unsigned short Lspeed, unsigned short Rspeed,
                         float delaytime){
   if(Lspeed <= MAXSPEED && Rspeed <= MAXSPEED){
-    lServospeed = 90 - Lspeed);
+    lServospeed = 90 - Lspeed;
     rServospeed = 90 + Rspeed;
     LServo.write(lServospeed);
     RServo.write(rServospeed);
@@ -47,6 +44,8 @@ void RoboBull::backward(unsigned short Lspeed, unsinged short Rspeed,
     LServo.write(lServospeed);
     RServo.write(rServospeed);
   }
+  if(delaytime > 0)
+    delay(delaytime * 1000);
   return;
 }
 
@@ -57,18 +56,18 @@ void RoboBull::turn(String direction, float delaytime){
   }
   else if(direction =="left"){
     LServo.write(90);
-    Rservo.write(80);
+    RServo.write(80);
   }
   else {
-    LServo.write(90):
+    LServo.write(90);
     RServo.write(90);
   }
-  if(delaytime < maxdelay){
+  if(delaytime > 0)
     delay(delaytime * 1000);
-  }
+
 }
 
-void RoboBull::turn90(String diretion){
+void RoboBull::turn90(String direction){
   if(direction == "right"){
     LServo.write(100);
     RServo.write(90);
@@ -81,10 +80,10 @@ void RoboBull::turn90(String diretion){
   }
 }
 
-unsigned short getLspeed() {
+unsigned short RoboBull::getLspeed() {
   return lServospeed;
 }
 
-unsigned short getRspeed() {
+unsigned short RoboBull::getRspeed() {
   return rServospeed;
 }
